@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="create-test-data" author="Ertsey Reka">
+        <insert tableName="client">
+            <column name="firstName" value="Lajos" />
+            <column name="lastName" value="Kovács" />
+            <column name="birthDate" value="1985-06-15" />
+            <column name="email" value="kovacs.lajos@test.com" />
+            <column name="phone" value="+36201122234" />
+            <column name="address" value="Budapest 1015, Fő út 2." />
+        </insert>
+        <insert tableName="client">
+            <column name="firstName" value="Laura" />
+            <column name="lastName" value="Kis" />
+            <column name="birthDate" value="2000-02-01" />
+            <column name="email" value="kis.laura@test.com" />
+            <column name="phone" value="+36301002599" />
+            <column name="address" value="Kecskemét 7689, Vas út 89." />
+        </insert>
+        <insert tableName="client">
+            <column name="firstName" value="Benedek" />
+            <column name="lastName" value="Marton" />
+            <column name="birthDate" value="1995-12-29" />
+            <column name="email" value="benedek.marton@test.com" />
+            <column name="phone" value="+36709876578" />
+            <column name="address" value="Budapest 1185, Virág út 299." />
+        </insert>
+        <insert tableName="client">
+            <column name="firstName" value="Melinda" />
+            <column name="lastName" value="Kovács" />
+            <column name="birthDate" value="2002-10-08" />
+            <column name="email" value="kovacs.melinda@test.com" />
+            <column name="phone" value="+36209342234" />
+            <column name="address" value="Szombathely 6578, Kerék utca 2." />
+        </insert>
+        <insert tableName="client">
+            <column name="firstName" value="Szilárd" />
+            <column name="lastName" value="Major" />
+            <column name="birthDate" value="1977-08-31" />
+            <column name="email" value="szilard.major@test.com" />
+            <column name="phone" value="+36308792933" />
+            <column name="address" value="Pécs 8321, Medve köz 2/B." />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
