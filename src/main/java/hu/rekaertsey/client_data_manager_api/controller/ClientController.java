@@ -5,10 +5,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hu.rekaertsey.client_data_manager_api.entity.Client;
 import hu.rekaertsey.client_data_manager_api.service.ClientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,37 +27,38 @@ public class ClientController {
     private final ClientService clientService;
 
     @GetMapping
-    public List<Client> getAllClients() {
-        return clientService.getAllClients();
+    public ResponseEntity<List<Client>> getAllClients() {
+        return ResponseEntity.ok(clientService.getAllClients());
     }
 
     @GetMapping("/{id}")
-    public Client getClientById(@PathVariable Long id) {
-        return clientService.getClientById(id);
+    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
+        return ResponseEntity.ok(clientService.getClientById(id));
     }
 
     @PostMapping
-    public Client createClient(@RequestBody Client client) {
-        return clientService.createClient(client);
+    public ResponseEntity<Client> createClient(@Valid @RequestBody Client client) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.createClient(client));
     }
 
     @PutMapping("/{id}")
-    public Client updateClient(@PathVariable Long id, @RequestBody Client client) {
-        return clientService.updateClient(id, client);
+    public ResponseEntity<Client> updateClient(@PathVariable Long id, @Valid @RequestBody Client client) {
+        return ResponseEntity.ok(clientService.updateClient(id, client));
     }
 
     @DeleteMapping("/{id}")
-    public String deleteClient(@PathVariable Long id) {
-        return clientService.deleteClient(id);
+    public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
+        clientService.deleteClient(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/avg-age")
-    public Double getAvgAgeOfClients() {
-        return clientService.getClientAVGAge();
+    public ResponseEntity<Double> getAvgAgeOfClients() {
+        return ResponseEntity.ok(clientService.getClientAVGAge());
     }
 
     @GetMapping("/age-range")
-    public List<Client> getClientsBetweenAge18And40() {
-        return clientService.getClientsBetween18And40();
+    public ResponseEntity<List<Client>> getClientsBetweenAge18And40() {
+        return ResponseEntity.ok(clientService.getClientsBetween18And40());
     }
 }

@@ -50,7 +50,7 @@ public class Client {
     private String email;
     
     @NotBlank(message="Phone number is required")
-    @Pattern(regexp = "^\\+[0-9]+$", message = "Valid phone number format is +36201231234")
+    @Pattern(regexp = "^\\+[1-9]\\d{6,14}$", message = "Valid phone number format is +36201231234")
     @Size(min=2, max=100, message="Phone number must be between 2 and 50 characters")
     private String phone;
     

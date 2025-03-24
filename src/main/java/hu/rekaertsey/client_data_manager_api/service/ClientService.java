@@ -3,11 +3,11 @@ package hu.rekaertsey.client_data_manager_api.service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import hu.rekaertsey.client_data_manager_api.entity.Client;
+import hu.rekaertsey.client_data_manager_api.exception.ClientNotFoundException;
 import hu.rekaertsey.client_data_manager_api.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +22,7 @@ public class ClientService {
     }
 
     public Client getClientById(Long id) {
-        return clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
+        return clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
     }
 
     public Client createClient(Client client) {
@@ -40,9 +40,8 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public String deleteClient(Long id) {
+    public void deleteClient(Long id) {
         clientRepository.delete(getClientById(id));
-        return "Client successfully deleted.";
     }
 
     public Double getClientAVGAge() {
@@ -55,7 +54,7 @@ public class ClientService {
                     int age = Period.between(client.getBirthDate(), LocalDate.now()).getYears();
                     return age >= 18 && age <= 40;
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }
