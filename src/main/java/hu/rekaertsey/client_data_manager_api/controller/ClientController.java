@@ -3,6 +3,8 @@ package hu.rekaertsey.client_data_manager_api.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.rekaertsey.client_data_manager_api.dto.ClientCreateRequest;
+import hu.rekaertsey.client_data_manager_api.dto.ClientUpdateRequest;
 import hu.rekaertsey.client_data_manager_api.entity.Client;
 import hu.rekaertsey.client_data_manager_api.service.ClientService;
 import jakarta.validation.Valid;
@@ -37,12 +39,12 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@Valid @RequestBody Client client) {
+    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientCreateRequest client) {
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.createClient(client));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable Long id, @Valid @RequestBody Client client) {
+    public ResponseEntity<Client> updateClient(@PathVariable Long id, @Valid @RequestBody ClientUpdateRequest client) {
         return ResponseEntity.ok(clientService.updateClient(id, client));
     }
 

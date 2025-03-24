@@ -5,7 +5,10 @@ import java.time.Period;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import hu.rekaertsey.client_data_manager_api.dto.ClientCreateRequest;
+import hu.rekaertsey.client_data_manager_api.dto.ClientUpdateRequest;
 import hu.rekaertsey.client_data_manager_api.entity.Client;
 import hu.rekaertsey.client_data_manager_api.exception.ClientNotFoundException;
 import hu.rekaertsey.client_data_manager_api.repository.ClientRepository;
@@ -25,18 +28,25 @@ public class ClientService {
         return clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
     }
 
-    public Client createClient(Client client) {
-        return clientRepository.save(client);
+    public Client createClient(ClientCreateRequest client) {
+        Client createdClient = new Client();
+        createdClient.setFirstName(client.getFirstName());
+        createdClient.setLastName(client.getLastName());
+        createdClient.setBirthDate(client.getBirthDate());
+        createdClient.setEmail(client.getEmail());
+        createdClient.setPhone(client.getPhone());
+        createdClient.setAddress(client.getAddress());
+        return clientRepository.save(createdClient);
     }
 
-    public Client updateClient(Long id, Client updated) {
+    public Client updateClient(Long id, ClientUpdateRequest updated) {
         Client client = getClientById(id);
-        client.setFirstName(updated.getFirstName());
-        client.setLastName(updated.getLastName());
-        client.setBirthDate(updated.getBirthDate());
-        client.setEmail(updated.getEmail());
-        client.setPhone(updated.getPhone());
-        client.setAddress(updated.getAddress());
+        if (StringUtils.hasText(updated.getFirstName())) client.setFirstName(updated.getFirstName());
+        if (StringUtils.hasText(updated.getLastName())) client.setLastName(updated.getLastName());
+        if (updated.getBirthDate() != null) client.setBirthDate(updated.getBirthDate());
+        if (StringUtils.hasText(updated.getEmail())) client.setEmail(updated.getEmail());
+        if (StringUtils.hasText(updated.getPhone())) client.setPhone(updated.getPhone());
+        if (StringUtils.hasText(updated.getAddress())) client.setAddress(updated.getAddress());
         return clientRepository.save(client);
     }
 
