@@ -51,7 +51,7 @@ public class ClientService {
     }
 
     public void deleteClient(Long id) {
-        clientRepository.delete(getClientById(id));
+        clientRepository.deleteById(id);
     }
 
     public Double getClientAVGAge() {
