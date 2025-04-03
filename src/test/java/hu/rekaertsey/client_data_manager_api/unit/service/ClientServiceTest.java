@@ -1,4 +1,4 @@
-package hu.rekaertsey.client_data_manager_api.service;
+package hu.rekaertsey.client_data_manager_api.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,6 +24,7 @@ import hu.rekaertsey.client_data_manager_api.dto.ClientUpdateRequest;
 import hu.rekaertsey.client_data_manager_api.entity.Client;
 import hu.rekaertsey.client_data_manager_api.exception.ClientNotFoundException;
 import hu.rekaertsey.client_data_manager_api.repository.ClientRepository;
+import hu.rekaertsey.client_data_manager_api.service.ClientService;
 
 @ExtendWith(MockitoExtension.class)
 public class ClientServiceTest {

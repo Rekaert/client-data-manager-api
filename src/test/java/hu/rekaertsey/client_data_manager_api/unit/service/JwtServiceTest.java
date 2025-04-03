@@ -1,4 +1,4 @@
-package hu.rekaertsey.client_data_manager_api.service;
+package hu.rekaertsey.client_data_manager_api.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.nimbusds.jose.JWSAlgorithm;
 
 import hu.rekaertsey.client_data_manager_api.config.AppJwtProperties;
+import hu.rekaertsey.client_data_manager_api.service.JwtService;
 
 @ExtendWith(MockitoExtension.class)
 public class JwtServiceTest {
